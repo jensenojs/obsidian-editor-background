@@ -1,16 +1,59 @@
-.markdown-reading-view:before,
-.cm-editor:before {
+body.obsidian-editor-background-workspace-prototype {
+	--obsidian-editor-background-workspace-surface: color-mix(in srgb, var(--background-primary) 18%, transparent);
+	--obsidian-editor-background-workspace-chrome: color-mix(in srgb, var(--background-secondary) 46%, transparent);
+	--obsidian-editor-background-workspace-border: color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
+}
+
+body.obsidian-editor-background-workspace-prototype:before {
 	content: "";
 	background-blend-mode: overlay;
 	background-repeat: no-repeat;
 	background-position: var(--obsidian-editor-background-position);
 	background-size: cover;
-	width: 100%;
-	height: 100%;
-	position: absolute;
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
 	background-image: var(--obsidian-editor-background-image);
 	opacity: var(--obsidian-editor-background-opacity);
 	filter: var(--obsidian-editor-background-bluriness);
+	z-index: 0;
+}
+
+body.obsidian-editor-background-workspace-prototype .app-container {
+	isolation: isolate;
+	position: relative;
+	z-index: 1;
+	background: transparent !important;
+}
+
+body.obsidian-editor-background-workspace-prototype .horizontal-main-container,
+body.obsidian-editor-background-workspace-prototype .workspace,
+body.obsidian-editor-background-workspace-prototype .workspace-split,
+body.obsidian-editor-background-workspace-prototype .workspace-tabs,
+body.obsidian-editor-background-workspace-prototype .workspace-tab-container,
+body.obsidian-editor-background-workspace-prototype .workspace-leaf,
+body.obsidian-editor-background-workspace-prototype .view-content,
+body.obsidian-editor-background-workspace-prototype .markdown-source-view,
+body.obsidian-editor-background-workspace-prototype .markdown-reading-view,
+body.obsidian-editor-background-workspace-prototype .markdown-preview-view,
+body.obsidian-editor-background-workspace-prototype .cm-editor,
+body.obsidian-editor-background-workspace-prototype .cm-scroller {
+	background: transparent !important;
+}
+
+body.obsidian-editor-background-workspace-prototype .workspace-leaf-content {
+	background: rgba(0, 0, 0, 0.18) !important;
+	background: var(--obsidian-editor-background-workspace-surface) !important;
+}
+
+body.obsidian-editor-background-workspace-prototype .workspace-tab-header-container,
+body.obsidian-editor-background-workspace-prototype .workspace-ribbon,
+body.obsidian-editor-background-workspace-prototype .mod-root .workspace-tab-header-container,
+body.obsidian-editor-background-workspace-prototype .status-bar {
+	background: rgba(0, 0, 0, 0.34) !important;
+	background: var(--obsidian-editor-background-workspace-chrome) !important;
+	border-color: rgba(255, 255, 255, 0.18) !important;
+	border-color: var(--obsidian-editor-background-workspace-border) !important;
 }
 
 .markdown-reading-view,
@@ -22,28 +65,3 @@
     padding-left: var(--obsidian-editor-background-line-padding);
     padding-right: var(--obsidian-editor-background-line-padding);
 }
-
-/* This sets the background for the whole app, seen with a positive z-index. However, the z-index disrupts interactions.
-.horizontal-main-container:before {
-	content: "";
-	background-blend-mode: overlay;
-	background-repeat: no-repeat;
-	background-position: var(--obsidian-editor-background-position);
-	background-size: cover;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	background-image: var(--obsidian-editor-background-image);
-	opacity: var(--obsidian-editor-background-opacity);
-	filter: var(--obsidian-editor-background-bluriness);
-}
-
-.horizontal-main-container {
-	background: var(--obsidian-editor-background-input-contrast);
-}
-.markdown-reading-view,
-.cm-editor .cm-contentContainer {
-    padding-left: var(--obsidian-editor-background-line-padding);
-    padding-right: var(--obsidian-editor-background-line-padding);
-}
-*/
