@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-editor-background",
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"description": "This allows you to specify a remote URL as the background image, and an opacity percentage for the background image.",
 	"main": "main.js",
 	"scripts": {
@@ -9,7 +9,7 @@
 		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
 	"keywords": ["obsidian", "plugin", "background", "image", "opacity, remote url"],
-	"author": "shmolf",
+	"author": "shmolf, jensenojs",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^16.11.6",
