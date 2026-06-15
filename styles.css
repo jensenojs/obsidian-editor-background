@@ -1,59 +1,87 @@
-body.obsidian-editor-background-workspace-prototype {
-	--obsidian-editor-background-workspace-surface: color-mix(in srgb, var(--background-primary) 18%, transparent);
+body.obsidian-editor-background-workspace {
+	--obsidian-workspace-background-surface: transparent;
+	--obsidian-workspace-background-chrome: color-mix(in srgb, var(--background-secondary) 46%, transparent);
+	--obsidian-workspace-background-chrome-active: color-mix(in srgb, var(--background-primary) 24%, transparent);
+	--obsidian-workspace-background-border: color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
+	--obsidian-editor-background-workspace-surface: transparent;
 	--obsidian-editor-background-workspace-chrome: color-mix(in srgb, var(--background-secondary) 46%, transparent);
+	--obsidian-editor-background-workspace-chrome-active: color-mix(in srgb, var(--background-primary) 24%, transparent);
 	--obsidian-editor-background-workspace-border: color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
 }
 
-body.obsidian-editor-background-workspace-prototype:before {
+body.obsidian-editor-background-workspace:before {
 	content: "";
-	background-blend-mode: overlay;
-	background-repeat: no-repeat;
-	background-position: var(--obsidian-editor-background-position);
-	background-size: cover;
+	background-blend-mode: var(--obsidian-workspace-background-blend-mode, overlay);
+	background-repeat: var(--obsidian-workspace-background-repeat, no-repeat);
+	background-position: var(--obsidian-workspace-background-position, var(--obsidian-editor-background-position));
+	background-size: var(--obsidian-workspace-background-size, cover);
 	position: fixed;
 	inset: 0;
 	pointer-events: none;
-	background-image: var(--obsidian-editor-background-image);
-	opacity: var(--obsidian-editor-background-opacity);
-	filter: var(--obsidian-editor-background-bluriness);
+	background-image: var(--obsidian-workspace-background-image, var(--obsidian-editor-background-image));
+	opacity: var(--obsidian-workspace-background-opacity, var(--obsidian-editor-background-opacity));
+	filter: var(--obsidian-workspace-background-filter, var(--obsidian-editor-background-bluriness));
 	z-index: 0;
 }
 
-body.obsidian-editor-background-workspace-prototype .app-container {
+body.obsidian-editor-background-workspace .app-container {
 	isolation: isolate;
 	position: relative;
 	z-index: 1;
 	background: transparent !important;
 }
 
-body.obsidian-editor-background-workspace-prototype .horizontal-main-container,
-body.obsidian-editor-background-workspace-prototype .workspace,
-body.obsidian-editor-background-workspace-prototype .workspace-split,
-body.obsidian-editor-background-workspace-prototype .workspace-tabs,
-body.obsidian-editor-background-workspace-prototype .workspace-tab-container,
-body.obsidian-editor-background-workspace-prototype .workspace-leaf,
-body.obsidian-editor-background-workspace-prototype .view-content,
-body.obsidian-editor-background-workspace-prototype .markdown-source-view,
-body.obsidian-editor-background-workspace-prototype .markdown-reading-view,
-body.obsidian-editor-background-workspace-prototype .markdown-preview-view,
-body.obsidian-editor-background-workspace-prototype .cm-editor,
-body.obsidian-editor-background-workspace-prototype .cm-scroller {
+body.obsidian-editor-background-workspace .horizontal-main-container,
+body.obsidian-editor-background-workspace .workspace,
+body.obsidian-editor-background-workspace .workspace-split,
+body.obsidian-editor-background-workspace .workspace-tabs,
+body.obsidian-editor-background-workspace .workspace-tab-container,
+body.obsidian-editor-background-workspace .workspace-leaf,
+body.obsidian-editor-background-workspace .view-content,
+body.obsidian-editor-background-workspace .markdown-source-view,
+body.obsidian-editor-background-workspace .markdown-reading-view,
+body.obsidian-editor-background-workspace .markdown-preview-view,
+body.obsidian-editor-background-workspace .cm-editor,
+body.obsidian-editor-background-workspace .cm-scroller {
 	background: transparent !important;
 }
 
-body.obsidian-editor-background-workspace-prototype .workspace-leaf-content {
-	background: rgba(0, 0, 0, 0.18) !important;
-	background: var(--obsidian-editor-background-workspace-surface) !important;
+body.obsidian-editor-background-workspace .workspace-leaf-content {
+	background: transparent !important;
+	background: var(--obsidian-workspace-background-surface, var(--obsidian-editor-background-workspace-surface)) !important;
 }
 
-body.obsidian-editor-background-workspace-prototype .workspace-tab-header-container,
-body.obsidian-editor-background-workspace-prototype .workspace-ribbon,
-body.obsidian-editor-background-workspace-prototype .mod-root .workspace-tab-header-container,
-body.obsidian-editor-background-workspace-prototype .status-bar {
+body.obsidian-editor-background-workspace .workspace-tab-header-container,
+body.obsidian-editor-background-workspace .workspace-ribbon,
+body.obsidian-editor-background-workspace .mod-root .workspace-tab-header-container,
+body.obsidian-editor-background-workspace .status-bar {
 	background: rgba(0, 0, 0, 0.34) !important;
-	background: var(--obsidian-editor-background-workspace-chrome) !important;
+	background: var(--obsidian-workspace-background-chrome, var(--obsidian-editor-background-workspace-chrome)) !important;
 	border-color: rgba(255, 255, 255, 0.18) !important;
-	border-color: var(--obsidian-editor-background-workspace-border) !important;
+	border-color: var(--obsidian-workspace-background-border, var(--obsidian-editor-background-workspace-border)) !important;
+}
+
+body.obsidian-editor-background-workspace .workspace-tab-header,
+body.obsidian-editor-background-workspace .workspace-tab-header-inner,
+body.obsidian-editor-background-workspace .workspace-tab-header-inner-title,
+body.obsidian-editor-background-workspace .workspace-tab-header-inner-close-button {
+	background: transparent !important;
+}
+
+body.obsidian-editor-background-workspace .workspace-tab-header.is-active .workspace-tab-header-inner {
+	background: rgba(0, 0, 0, 0.16) !important;
+	background: var(--obsidian-workspace-background-chrome-active, var(--obsidian-editor-background-workspace-chrome-active)) !important;
+}
+
+body.obsidian-editor-background-workspace .modal.mod-settings,
+body.obsidian-editor-background-workspace .modal.mod-settings .modal-content,
+body.obsidian-editor-background-workspace .modal.mod-settings .vertical-tab-container,
+body.obsidian-editor-background-workspace .modal.mod-settings .vertical-tab-header,
+body.obsidian-editor-background-workspace .modal.mod-settings .vertical-tab-content-container,
+body.obsidian-editor-background-workspace .modal.mod-settings .vertical-tab-content,
+body.obsidian-editor-background-workspace .modal.mod-settings .settings-tabs-container,
+body.obsidian-editor-background-workspace .modal.mod-settings .setting-item {
+	background: transparent !important;
 }
 
 .markdown-reading-view,
