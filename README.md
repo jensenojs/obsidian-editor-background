@@ -1,5 +1,16 @@
 # Obsidian Editor Background Plugin
 
+This fork is maintained for personal BRAT installation across my Obsidian vaults.
+It keeps the upstream editor background behavior and adds a workspace-level
+background owner: one `body::before` image plane can show through the workspace,
+sidebars, settings modal, and other Obsidian chrome.
+
+The fork intentionally does not ship the temporary diagnostics that were used
+while investigating Obsidian/OpenCode iframe rendering issues. The production
+plugin should only own background image variables, the single workspace image
+plane, and the minimal Obsidian container transparency needed to reveal that
+plane.
+
 This plugin is meant to provide an aesthetic background for the Editor view of Obsidian.
 It currently only supports remote assets, so you'll need to host your own images.
 

@@ -13,7 +13,7 @@ Reason:
 - `.workspace::before` was tested as an experiment and made the visual model harder to reason about. It also does not naturally cover settings/modal surfaces.
 - Keeping both `body::before` and `.workspace::before` would create two background owners. That can double opacity, create different crop geometry, and make later artifacts impossible to attribute.
 
-Do not reintroduce `.workspace::before` unless the goal is explicitly a short-lived experiment, and record diagnostics before deciding whether to keep or remove it.
+Do not reintroduce `.workspace::before` unless the goal is explicitly a short-lived experiment. Experiments must stay out of the production branch unless they become the single background owner.
 
 ## Why This Change Exists
 
@@ -36,7 +36,7 @@ A reasonable change keeps these properties true:
 - One crop geometry for the parent Obsidian document.
 - CSS variables describe the owner; they do not create another owner.
 - Material layers can tint the image, but they should be broad UI surfaces, not one-off fixes for a screenshot.
-- Diagnostics may observe CodeMirror, focus, iframe, and workspace state, but diagnostics must not silently repair them.
+- Runtime diagnostics do not belong in the production plugin. If a rendering issue needs local probes, put them on a temporary branch or patch and remove them before release.
 
 The expected tradeoff is that Obsidian panes can have different material density. That is acceptable when the difference comes from intentional UI surface treatment. It is not acceptable when the difference comes from two background images, two crops, or hidden selector patches.
 
@@ -83,19 +83,6 @@ The workspace variables are the stable surface that other local plugins may read
 
 `--obsidian-editor-background-*` variables are compatibility output. Do not use them to restore editor-local image pseudo-elements unless the product goal explicitly changes back to editor-only backgrounds.
 
-## Diagnostics
-
-Diagnostics are part of this fork because the real issue has crossed plugin boundaries.
-
-Keep diagnostic output compact by default:
-
-- `Copy background point diagnostics` may include deeper local detail because it is a single point capture.
-- Trace and click-capture diagnostics must use compact point stacks and compact visible dark layers.
-- Do not dump repeated full computed styles across every frame.
-- Prefer stable labels such as `main-markdown:left-rail-upper` over ad hoc screenshot descriptions.
-
-The diagnostics should explain what layer owns what. They should not become a repair mechanism.
-
 ## Experiments
 
 A rendering experiment must be reversible and named by the exact owner being tested.
@@ -106,11 +93,7 @@ Acceptable experiment examples:
 - Move the parent background owner from `body::before` to `.workspace::before` for one run.
 - Make iframe root opaque for one run.
 
-Before keeping an experiment:
-
-- Capture diagnostics in the experiment state.
-- Explain what changed and what did not change.
-- Remove the experiment if it only adds another layer or another owner.
+Before keeping an experiment, explain what changed and what did not change. Remove the experiment if it only adds another layer or another owner.
 
 The `.workspace::before` experiment was a weak hypothesis about the lowest fixed layer interacting with iframe focus and Electron composition. It did not become a stronger model. The retained architecture is `body::before` because it matches the product goal better and keeps one owner.
 
@@ -123,7 +106,6 @@ Keep unrelated visual experiments out of the same commit.
 Good commit shapes:
 
 - "Use body-level workspace background contract"
-- "Add compact background diagnostics"
 - "Make settings modal containers transparent"
 
 Bad commit shapes:
