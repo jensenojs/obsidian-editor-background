@@ -83,6 +83,23 @@ The workspace variables are the stable surface that other local plugins may read
 
 `--obsidian-editor-background-*` variables are compatibility output. Do not use them to restore editor-local image pseudo-elements unless the product goal explicitly changes back to editor-only backgrounds.
 
+## Load Timing
+
+The plugin must apply the workspace background contract immediately after settings load. Mobile Obsidian, settings, and drawer surfaces can be visible before `workspace.onLayoutReady` runs. Waiting only for layout readiness leaves those surfaces with the theme's opaque defaults until a later refresh path happens to write the body class and CSS variables.
+
+Keep `this.UpdateBackground(document)` in `onload()` after `loadSettings()`. `onLayoutReady` is still useful as a later refresh point, and `window-open` is still needed for additional Obsidian windows.
+
+## Mobile Surfaces
+
+Mobile CSS should be grouped by surface category:
+
+- structural workspace/editor surfaces reveal the single `body::before` image plane;
+- mobile chrome surfaces such as nav bars, toolbars, drawer headers, and tab headers keep a translucent material layer;
+- modal, menu, suggestion, prompt, and popover surfaces keep a stronger translucent material layer;
+- nav rows, toolbar options, and tab header internals stay transparent.
+
+Do not write mobile fixes as screenshot-specific selector patches. Add a selector only when it belongs to one of those surface categories.
+
 ## Experiments
 
 A rendering experiment must be reversible and named by the exact owner being tested.

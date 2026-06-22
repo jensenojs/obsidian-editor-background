@@ -24,6 +24,7 @@ export default class BackgroundPlugin extends Plugin {
 
   async onload() {
     await this.loadSettings();
+    this.UpdateBackground(document);
 
     this.addSettingTab(new UrlSettingsTab(this.app, this));
     this.app.workspace.onLayoutReady(() => this.UpdateBackground(document));

@@ -29,6 +29,8 @@ body.obsidian-editor-background-workspace .app-container {
 	position: relative;
 	z-index: 1;
 	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
 }
 
 body.obsidian-editor-background-workspace .horizontal-main-container,
@@ -41,9 +43,14 @@ body.obsidian-editor-background-workspace .view-content,
 body.obsidian-editor-background-workspace .markdown-source-view,
 body.obsidian-editor-background-workspace .markdown-reading-view,
 body.obsidian-editor-background-workspace .markdown-preview-view,
+body.obsidian-editor-background-workspace .markdown-rendered,
+body.obsidian-editor-background-workspace .markdown-preview-sizer,
+body.obsidian-editor-background-workspace .markdown-preview-section,
 body.obsidian-editor-background-workspace .cm-editor,
 body.obsidian-editor-background-workspace .cm-scroller {
 	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
 }
 
 body.obsidian-editor-background-workspace .workspace-leaf-content {
@@ -54,17 +61,26 @@ body.obsidian-editor-background-workspace .workspace-leaf-content {
 body.obsidian-editor-background-workspace .workspace-tab-header-container,
 body.obsidian-editor-background-workspace .workspace-ribbon,
 body.obsidian-editor-background-workspace .mod-root .workspace-tab-header-container,
-body.obsidian-editor-background-workspace .status-bar {
+body.obsidian-editor-background-workspace .status-bar,
+body.obsidian-editor-background-workspace .mobile-navbar,
+body.obsidian-editor-background-workspace .mobile-toolbar,
+body.obsidian-editor-background-workspace .mobile-toolbar-options-container,
+body.obsidian-editor-background-workspace .workspace-drawer-ribbon,
+body.obsidian-editor-background-workspace .workspace-drawer-header {
 	background: rgba(0, 0, 0, 0.34) !important;
 	background: var(--obsidian-workspace-background-chrome, var(--obsidian-editor-background-workspace-chrome)) !important;
 	border-color: rgba(255, 255, 255, 0.18) !important;
 	border-color: var(--obsidian-workspace-background-border, var(--obsidian-editor-background-workspace-border)) !important;
+	backdrop-filter: blur(8px) saturate(1.08);
+	-webkit-backdrop-filter: blur(8px) saturate(1.08);
 }
 
 body.obsidian-editor-background-workspace .workspace-tab-header,
 body.obsidian-editor-background-workspace .workspace-tab-header-inner,
 body.obsidian-editor-background-workspace .workspace-tab-header-inner-title,
-body.obsidian-editor-background-workspace .workspace-tab-header-inner-close-button {
+body.obsidian-editor-background-workspace .workspace-tab-header-inner-close-button,
+body.obsidian-editor-background-workspace .mobile-toolbar-option,
+body.obsidian-editor-background-workspace .workspace-drawer-tab-option-item {
 	background: transparent !important;
 }
 
@@ -82,6 +98,105 @@ body.obsidian-editor-background-workspace .modal.mod-settings .vertical-tab-cont
 body.obsidian-editor-background-workspace .modal.mod-settings .settings-tabs-container,
 body.obsidian-editor-background-workspace .modal.mod-settings .setting-item {
 	background: transparent !important;
+}
+
+body.obsidian-editor-background-workspace:is(.is-mobile, .is-phone) {
+	--obsidian-workspace-background-mobile-chrome: color-mix(in srgb, var(--background-secondary) 56%, transparent);
+	--obsidian-workspace-background-mobile-popover: color-mix(in srgb, var(--background-primary) 82%, transparent);
+	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
+}
+
+body.obsidian-editor-background-workspace:is(.is-mobile, .is-phone)::before {
+	z-index: 0;
+}
+
+body.obsidian-editor-background-workspace:is(.is-mobile, .is-phone) :is(
+	.app-container,
+	.horizontal-main-container,
+	.workspace,
+	.workspace-split,
+	.workspace-tabs,
+	.workspace-tab-container,
+	.workspace-leaf,
+	.workspace-leaf-content,
+	.view-content,
+	.markdown-source-view,
+	.markdown-reading-view,
+	.markdown-preview-view,
+	.markdown-rendered,
+	.markdown-preview-sizer,
+	.markdown-preview-section,
+	.cm-editor,
+	.cm-scroller,
+	.cm-contentContainer,
+	.workspace-drawer,
+	.workspace-drawer-inner,
+	.workspace-drawer-active-tab-container,
+	.workspace-drawer-tab-container,
+	.nav-files-container,
+	.nav-folder-children,
+	.search-result-container
+) {
+	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
+}
+
+body.obsidian-editor-background-workspace:is(.is-mobile, .is-phone) :is(
+	.view-header,
+	.workspace-tab-header-container,
+	.workspace-tab-header-container-inner,
+	.mobile-navbar,
+	.mobile-toolbar,
+	.mobile-toolbar-options-container,
+	.workspace-drawer-ribbon,
+	.workspace-drawer-header,
+	.nav-header
+) {
+	background: var(--obsidian-workspace-background-mobile-chrome) !important;
+	background-color: var(--obsidian-workspace-background-mobile-chrome) !important;
+	background-image: none !important;
+	border-color: var(--obsidian-workspace-background-border, var(--obsidian-editor-background-workspace-border)) !important;
+	backdrop-filter: blur(8px) saturate(1.08);
+	-webkit-backdrop-filter: blur(8px) saturate(1.08);
+}
+
+body.obsidian-editor-background-workspace:is(.is-mobile, .is-phone) :is(
+	.modal,
+	.modal-container,
+	.modal-content,
+	.vertical-tab-container,
+	.vertical-tab-header,
+	.vertical-tab-content-container,
+	.vertical-tab-content,
+	.settings-tabs-container,
+	.setting-item,
+	.menu,
+	.suggestion-container,
+	.prompt,
+	.popover,
+	.community-modal-info
+) {
+	background: var(--obsidian-workspace-background-mobile-popover) !important;
+	background-color: var(--obsidian-workspace-background-mobile-popover) !important;
+	background-image: none !important;
+}
+
+body.obsidian-editor-background-workspace:is(.is-mobile, .is-phone) :is(
+	.workspace-tab-header,
+	.workspace-tab-header-inner,
+	.workspace-tab-header-inner-title,
+	.workspace-tab-header-inner-close-button,
+	.mobile-toolbar-option,
+	.workspace-drawer-tab-option-item,
+	.nav-file-title,
+	.nav-folder-title
+) {
+	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
 }
 
 .markdown-reading-view,
